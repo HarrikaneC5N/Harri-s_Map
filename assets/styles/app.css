@@ -1,3 +1,23 @@
 body {
-    background-color: skyblue;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    text-align: center;
+    margin-top: auto;
+}
+
+#maCarte {
+    height: 700px;
+    width: 100%;
+}
+
+.leaflet-popup-content img{
+    width: 100%;
 }
