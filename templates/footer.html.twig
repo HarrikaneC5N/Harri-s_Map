@@ -18,7 +18,6 @@
                 "Toulouse": {"lat": 43.6047, "long": 1.4442, "description": "Ville rose, dynamique et festive."},
                 "Nice": {"lat": 43.7102, "long": 7.2620, "description": "Promenade des Anglais et douceur de vivre."},
                 "Nantes": {"lat": 47.2184, "long": -1.5536, "description": "Ville créative et historique sur la Loire."},
-                "Strasbourg": {"lat": 48.8566, "long": 2.3522, "description": "Cité européenne au charme alsacien."},
                 "Bordeaux": {"lat": 44.8378, "long": -0.5792, "description": "Vignobles, architecture et art de vivre."},
                 "Lille": {"lat": 50.6292, "long": 3.0573, "description": "Ville cosmopolite et festive du nord de la France."},
                 "Tokyo": {"lat": 35.6895, "long": 139.6917, "description": "Métropole ultramoderne aux traditions anciennes."},
@@ -27,6 +26,8 @@
                 "Sydney": {"lat": -33.8688, "long": 151.2093, "description": "Vibrante et ensoleillée, avec l'opéra emblématique."},
                 "Cape Town": {"lat": -33.918861, "long": 18.423300, "description": "Vue imprenable sur la montagne de la Table et l'océan atlantique."}
             };
+
+            var tableauMarqueurs = [];
 
             var map = L.map('maCarte').setView([46.2052, 5.2275], 5);
 
@@ -38,8 +39,8 @@
             }).addTo(map);
 
             // Ajout d'un marqueur
-            var marqueurBg = L.marker([46.2052, 5.2275]).addTo(map);
-            marqueurBg.bindPopup("<b>Ici c'est l'ain!</b><br>Description popup Bourg en bresse.");
+            //var marqueurBg = L.marker([46.2052, 5.2275]).addTo(map);
+            //marqueurBg.bindPopup("<b>Ici c'est l'ain!</b><br>Description popup Bourg en bresse.");
 
             // Ajout des villes
             function ajouterVille(villes, marqueurs) {
@@ -62,12 +63,21 @@
                     marqueur.bindPopup("<b>" + ville + "</b><br>"+ laVille.description+ " " + ville + "." +"</br> " +
                         "<img src='https://boulangerie.org/wp-content/uploads/baguette-viennoise-scaled.jpg' alt='photo de "+ville+"'>");
                     marqueurs.addLayer(marqueur); // ajout du marqueur au groupe
+
+                    // on ajoute le marqueur au tableau
+                    tableauMarqueurs.push(marqueur);
                 }
+                // on regroupe les marqueurs dans un groupe leaflet
+                var groupe = new L.featureGroup(tableauMarqueurs);
+
+                // on centre la carte sur le groupe de marqueurs
+                map.fitBounds(groupe.getBounds());
+
                 map.addLayer(marqueurs); // ajout du groupe de marqueurs à la carte
             }
             ajouterVille(villes);
             function onMapClick(e) {
-                alert("Vous avez situé le point à la lat et long :  " + e.latlng);
+                alert("Ajoutez un point");
             }
 
             map.on('click', onMapClick);
