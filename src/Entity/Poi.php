@@ -16,17 +16,20 @@ class Poi
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column]
-    private ?int $lat = null;
+    #[ORM\Column(length: 255)]
+    private ?string $lat = null;
 
-    #[ORM\Column]
-    private ?float $longitude = null;
+    #[ORM\Column(length: 255)]
+    private ?string $longitude = null;
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
     private ?string $teaser = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $picture = null;
 
     public function getId(): ?int
     {
@@ -89,6 +92,18 @@ class Poi
     public function setTeaser(string $teaser): static
     {
         $this->teaser = $teaser;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
 
         return $this;
     }
