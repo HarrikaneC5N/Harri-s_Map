@@ -52,4 +52,4 @@ deploy:
   only:
     - main
   tags:
-    - shell-runner
+    - my-shell-runner
