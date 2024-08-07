@@ -25,7 +25,8 @@ test_dev:
 test_main:
   stage: test
   before_script:
-    - "python --version"
+    - echo "avant les commandes du powershell"
+    - powershell -Command "python --version"
     - powershell -Command "pip --version"
     - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
     - powershell -Command "echo $env:PATH"
