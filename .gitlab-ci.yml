@@ -1,5 +1,6 @@
 stages:
   - test
+  - deployement
 
 # Job de test simple
 test:
@@ -10,5 +11,12 @@ test:
     - pwsh -Command "python --version"
     - pwsh -Command "pip --version"
     - pwsh -Command "Write-Host 'Les tests sont nickels'"
+  tags:
+    - my-shell-runner
+
+deployement:
+  stage: deployement
+  script:
+    - pwsh -Command "echo 'hello world'"
   tags:
     - my-shell-runner
