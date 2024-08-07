@@ -22,6 +22,10 @@ time.sleep(3)
 # Vérifier la présence d'un élément spécifique (par exemple, le titre de la page)
 assert "Log in!" in driver.title
 
+# Supprimer l'ancienne capture si el existe
+import os
+if os.path.exists("capture_homepage.png"):
+    os.remove("capture_homepage.png")
 # Prendre une capture d'écran
 driver.save_screenshot("capture_homepage.png")
 
