@@ -5,7 +5,7 @@ stages:
 test_job:
   stage: test
   before_script:
-    - pwsh -Command "& 'C:/path/to/python.exe' --version"
+    - pwsh -Command "python --version"
     - pwsh -Command "pip --version"
     - pwsh -Command "pip install selenium webdriver_manager"
   script:
