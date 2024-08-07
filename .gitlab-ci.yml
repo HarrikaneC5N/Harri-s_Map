@@ -6,14 +6,11 @@ stages:
 test:
   stage: test
   before_script:
-    - pwsh -Command "python --version"
-    - pwsh -Command "pip --version"
-    - pwsh -Command "pip install selenium"
-    - pwsh -Command "Invoke-WebRequest -Uri 'https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_win32.zip' -OutFile 'chromedriver_win32.zip'"
-    - pwsh -Command "Expand-Archive -Path 'chromedriver_win32.zip' -DestinationPath 'C:\\chromedriver'"
-    - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\\chromedriver', [System.EnvironmentVariableTarget]::Process)"
+    - 'python --version'
+    - 'pip --version'
+    - 'pip install selenium'
   script:
-    - pwsh -Command "python tests/test_harri_map.py"
+    - 'python tests/test_harri_map.py'
   artifacts:
     paths:
       - screenshots/
@@ -24,7 +21,7 @@ test:
 deploy:
   stage: deploy
   script:
-    - pwsh -Command "Write-Host 'Déploiement en cours...'"
+    - 'Write-Host "Déploiement en cours..."'
     # Commandes de déploiement ici
   environment:
     name: production
