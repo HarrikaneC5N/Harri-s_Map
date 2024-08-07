@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 import time
+import os
 
 # Configurer les options du navigateur
 chrome_options = Options()
@@ -22,12 +23,14 @@ time.sleep(3)
 # Vérifier la présence d'un élément spécifique (par exemple, le titre de la page)
 assert "Log in!" in driver.title
 
-# Supprimer l'ancienne capture si el existe
-import os
+# Supprimer l'ancienne capture si elle existe
 if os.path.exists("capture_homepage.png"):
     os.remove("capture_homepage.png")
+
 # Prendre une capture d'écran
-driver.save_screenshot("capture_homepage.png")
+if not os.path.exists('screenshots'):
+    os.makedirs('screenshots')
+driver.save_screenshot("screenshots/capture_homepage.png")
 
 # Fermer le navigateur
 driver.quit()

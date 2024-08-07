@@ -8,6 +8,7 @@ test_dev:
   image: python:3.8
   before_script:
     - pip install selenium
+    - pip install webdriver_manager
     - wget https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
     - unzip chromedriver_linux64.zip -d /usr/local/bin/
   script:
@@ -24,6 +25,7 @@ test_main:
   image: python:3.8
   before_script:
     - pip install selenium
+    - pip install webdriver_manager
     - wget https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
     - unzip chromedriver_linux64.zip -d /usr/local/bin/
   script:
