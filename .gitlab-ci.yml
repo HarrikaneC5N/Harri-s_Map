@@ -6,13 +6,14 @@ stages:
 test_dev:
   stage: test
   before_script:
-    - powershell -Command "python --version"
-    - powershell -Command "pip --version"
-    - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
-    - powershell -Command "echo $env:PATH"
+    - pwsh -Command "python --version"
+    - pwsh -Command "pip --version"
+    - pwsh -Command "echo $env:PATH"
+    - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
+    - pwsh -Command "echo $env:PATH"
   script:
-    - powershell -Command "pip install selenium webdriver_manager"
-    - powershell -Command "python tests/test_harri_map.py"
+    - pwsh -Command "pip install selenium webdriver_manager"
+    - pwsh -Command "python tests/test_harri_map.py"
   artifacts:
     paths:
       - screenshots/
@@ -25,13 +26,14 @@ test_dev:
 test_main:
   stage: test
   before_script:
-    - "python --version"
-    - powershell -Command "pip --version"
-    - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
-    - powershell -Command "echo $env:PATH"
+    - pwsh -Command "python --version"
+    - pwsh -Command "pip --version"
+    - pwsh -Command "echo $env:PATH"
+    - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
+    - pwsh -Command "echo $env:PATH"
   script:
-    - powershell -Command "pip install selenium webdriver_manager"
-    - powershell -Command "python tests/test_harri_map.py"
+    - pwsh -Command "pip install selenium webdriver_manager"
+    - pwsh -Command "python tests/test_harri_map.py"
   artifacts:
     paths:
       - screenshots/
@@ -44,7 +46,7 @@ test_main:
 deploy:
   stage: deploy
   script:
-    - powershell -Command "Write-Host 'Déploiement en cours...'"
+    - pwsh -Command "Write-Host 'Déploiement en cours...'"
     # Ajoutez ici vos commandes de déploiement spécifiques
   environment:
     name: production
