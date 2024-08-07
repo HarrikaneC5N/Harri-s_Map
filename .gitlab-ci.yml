@@ -6,11 +6,11 @@ stages:
 test_dev:
   stage: test
   before_script:
-    - pwsh -Command "python --version"
-    - pwsh -Command "pip --version"
     - pwsh -Command "echo $env:PATH"
     - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
     - pwsh -Command "echo $env:PATH"
+    - pwsh -Command "python --version"
+    - pwsh -Command "pip --version"
   script:
     - pwsh -Command "pip install selenium webdriver_manager"
     - pwsh -Command "python tests/test_harri_map.py"
@@ -26,11 +26,12 @@ test_dev:
 test_main:
   stage: test
   before_script:
-    - pwsh -Command "python --version"
-    - pwsh -Command "pip --version"
     - pwsh -Command "echo $env:PATH"
+    - echo "Avant toutes commandes"
     - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
     - pwsh -Command "echo $env:PATH"
+    - pwsh -Command "python --version"
+    - pwsh -Command "pip --version"
   script:
     - pwsh -Command "pip install selenium webdriver_manager"
     - pwsh -Command "python tests/test_harri_map.py"
