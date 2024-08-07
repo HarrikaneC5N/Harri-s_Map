@@ -1,0 +1,33 @@
+stages:
+  - test
+  - deploy
+
+# Job de test
+test:
+  stage: test
+  image: python:3.8
+  before_script:
+    - pip install selenium
+    - wget https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
+    - unzip chromedriver_linux64.zip -d /usr/local/bin/
+  script:
+    - python tests/test_harri_map.py
+  artifacts:
+    paths:
+      - screenshots/
+  tags:
+    - shared
+
+# Job de déploiement
+deploy:
+  stage: deploy
+  script:
+    - echo "Déploiement en cours..."
+    # Ajoute ici tes commandes de déploiement spécifiques
+  environment:
+    name: production
+    url: https://votre-site.com
+  only:
+    - master
+  tags:
+    - shared

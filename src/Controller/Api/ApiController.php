@@ -38,6 +38,7 @@ class ApiController extends AbstractController
     #[Route('/api/pois/create', name: 'api_create_poi', methods: ['POST'])]
     public function createPoi(Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator): JsonResponse
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $data = json_decode($request->getContent(), true);
 
         $poi = new Poi();
