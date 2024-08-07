@@ -13,6 +13,8 @@ test_dev:
       - screenshots/
   only:
     - dev
+  tags:
+    - my-shell-runner
 
 # Job de test pour la branche principale
 test_main:
@@ -25,6 +27,8 @@ test_main:
       - screenshots/
   only:
     - main
+  tags:
+    - my-shell-runner
 
 # Job de déploiement
 deploy:
@@ -37,3 +41,5 @@ deploy:
     url: http://127.0.0.1:8000/
   only:
     - main
+  tags:
+    - my-shell-runner
