@@ -6,7 +6,7 @@ stages:
 test_dev:
   stage: test
   before_script:
-    - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\\Python39;C:\\Python39\\Scripts', [System.EnvironmentVariableTarget]::Process)"
+    - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', `"$env:PATH;C:\Python39;C:\Python39\Scripts`", [System.EnvironmentVariableTarget]::Process)"
     - pwsh -Command "[System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Process)"
     - pwsh -Command "python --version"
     - pwsh -Command "pip --version"
@@ -25,7 +25,7 @@ test_dev:
 test_main:
   stage: test
   before_script:
-    - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\\Python39;C:\\Python39\\Scripts', [System.EnvironmentVariableTarget]::Process)"
+    - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', `"$env:PATH;C:\Python39;C:\Python39\Scripts`", [System.EnvironmentVariableTarget]::Process)"
     - pwsh -Command "[System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Process)"
     - pwsh -Command "python --version"
     - pwsh -Command "pip --version"
