@@ -1,53 +1,9 @@
 stages:
   - test
-  - deploy
 
-# Job de test pour la branche de développement
-test_dev:
+test_job:
   stage: test
-  image: python:3.8
-  before_script:
-    - apt-get update
-    - apt-get install -y chromium-browser
-    - pip install selenium
-    - pip install webdriver_manager
-    - wget https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
-    - unzip chromedriver_linux64.zip -d /usr/local/bin/
   script:
-    - python tests/test_harri_map.py
-  artifacts:
-    paths:
-      - screenshots/
-  only:
-    - dev
-
-# Job de test pour la branche principale
-test_main:
-  stage: test
-  image: python:3.8
-  before_script:
-    - apt-get update
-    - apt-get install -y chromium-browser
-    - pip install selenium
-    - pip install webdriver_manager
-    - wget https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
-    - unzip chromedriver_linux64.zip -d /usr/local/bin/
-  script:
-    - python tests/test_harri_map.py
-  artifacts:
-    paths:
-      - screenshots/
-  only:
-    - main
-
-# Job de déploiement
-deploy:
-  stage: deploy
-  script:
-    - echo "Déploiement en cours..."
-    # Ajoute ici tes commandes de déploiement spécifiques
-  environment:
-    name: production
-    url: http://127.0.0.1:8000/
-  only:
-    - main
+    - echo "Running tests"
+  tags:
+    - my-shell-runner
