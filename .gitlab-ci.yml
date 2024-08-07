@@ -6,37 +6,39 @@ stages:
 test_dev:
   stage: test
   before_script:
-    - powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser"
-    - powershell -Command "pip install selenium"
-    - powershell -Command "pip install webdriver_manager"
-    - powershell -Command "Invoke-WebRequest -Uri 'https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_win32.zip' -OutFile 'chromedriver_win32.zip'"
-    - powershell -Command "Expand-Archive -Path 'chromedriver_win32.zip' -DestinationPath 'C:\chromedriver'"
-    - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\chromedriver', [System.EnvironmentVariableTarget]::Machine)"
+    - powershell -Command "python --version"
+    - powershell -Command "pip --version"
+    - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
+    - powershell -Command "echo $env:PATH"
   script:
+    - powershell -Command "pip install selenium webdriver_manager"
     - powershell -Command "python tests/test_harri_map.py"
   artifacts:
     paths:
       - screenshots/
   only:
     - dev
+  tags:
+    - shell-runner
 
 # Job de test pour la branche principale
 test_main:
   stage: test
   before_script:
-    - powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser"
-    - powershell -Command "pip install selenium"
-    - powershell -Command "pip install webdriver_manager"
-    - powershell -Command "Invoke-WebRequest -Uri 'https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_win32.zip' -OutFile 'chromedriver_win32.zip'"
-    - powershell -Command "Expand-Archive -Path 'chromedriver_win32.zip' -DestinationPath 'C:\chromedriver'"
-    - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\chromedriver', [System.EnvironmentVariableTarget]::Machine)"
+    - "python --version"
+    - powershell -Command "pip --version"
+    - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
+    - powershell -Command "echo $env:PATH"
   script:
+    - powershell -Command "pip install selenium webdriver_manager"
     - powershell -Command "python tests/test_harri_map.py"
   artifacts:
     paths:
       - screenshots/
   only:
     - main
+  tags:
+    - shell-runner
 
 # Job de déploiement
 deploy:
@@ -49,3 +51,5 @@ deploy:
     url: http://127.0.0.1:8000/
   only:
     - main
+  tags:
+    - shell-runner
