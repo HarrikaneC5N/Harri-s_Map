@@ -5,10 +5,14 @@ stages:
 # Job de test pour la branche de développement
 test_dev:
   stage: test
+  before_script:
+    - powershell -Command "python --version"
+    - powershell -Command "pip --version"
+    - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
   script:
-    - echo "Avant premier pip"
-    - pip install selenium webdriver_manager
-    - python tests/test_harri_map.py
+    - echo "Avant le  pip test main"
+    - powershell -Command "pip install selenium webdriver_manager"
+    - powershell -Command "python tests/test_harri_map.py"
   artifacts:
     paths:
       - screenshots/
@@ -20,10 +24,14 @@ test_dev:
 # Job de test pour la branche principale
 test_main:
   stage: test
+  before_script:
+    - powershell -Command "python --version"
+    - powershell -Command "pip --version"
+    - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\Python39;C:\Python39\Scripts', [System.EnvironmentVariableTarget]::Process)"
   script:
-    - echo "Avant premier pip test main"
-    - pip install selenium webdriver_manager
-    - python tests/test_harri_map.py
+    - echo "Avant le  pip test main"
+    - powershell -Command "pip install selenium webdriver_manager"
+    - powershell -Command "python tests/test_harri_map.py"
   artifacts:
     paths:
       - screenshots/
@@ -36,8 +44,8 @@ test_main:
 deploy:
   stage: deploy
   script:
-    - echo "Déploiement en cours..."
-    # Ajoute ici tes commandes de déploiement spécifiques
+    - powershell -Command "Write-Host 'Déploiement en cours...'"
+    # Ajoutez ici vos commandes de déploiement spécifiques
   environment:
     name: production
     url: http://127.0.0.1:8000/
