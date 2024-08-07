@@ -5,8 +5,6 @@ stages:
 # Job de test simple
 test:
   stage: test
-  before_script:
-    - pwsh -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser"
   script:
     - pwsh -Command "python --version"
     - pwsh -Command "pip --version"
@@ -17,6 +15,6 @@ test:
 deployement:
   stage: deployement
   script:
-    - pwsh -Command "echo 'hello world'"
+    - pwsh -Command "echo 'hello world'""
   tags:
     - my-shell-runner
