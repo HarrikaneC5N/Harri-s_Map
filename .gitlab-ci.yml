@@ -6,9 +6,9 @@ stages:
 test:
   stage: test
   script:
-    - pwsh -Command "python --version"
-    - pwsh -Command "pip --version"
-    - pwsh -Command "Write-Host 'Les tests sont nickels'"
+    - python --version
+    - pip --version
+    - Write-Host 'Les tests sont nickels
   tags:
     - my-shell-runner
 
