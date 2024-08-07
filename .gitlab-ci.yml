@@ -5,16 +5,15 @@ stages:
 # Job de test pour la branche de développement
 test_dev:
   stage: test
-  image: python:3.8
   before_script:
-    - apt-get update
-    - apt-get install -y chromium-browser
-    - pip install selenium
-    - pip install webdriver_manager
-    - wget https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
-    - unzip chromedriver_linux64.zip -d /usr/local/bin/
+    - powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser"
+    - powershell -Command "pip install selenium"
+    - powershell -Command "pip install webdriver_manager"
+    - powershell -Command "Invoke-WebRequest -Uri 'https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_win32.zip' -OutFile 'chromedriver_win32.zip'"
+    - powershell -Command "Expand-Archive -Path 'chromedriver_win32.zip' -DestinationPath 'C:\chromedriver'"
+    - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\chromedriver', [System.EnvironmentVariableTarget]::Machine)"
   script:
-    - python tests/test_harri_map.py
+    - powershell -Command "python tests/test_harri_map.py"
   artifacts:
     paths:
       - screenshots/
@@ -24,16 +23,15 @@ test_dev:
 # Job de test pour la branche principale
 test_main:
   stage: test
-  image: python:3.8
   before_script:
-    - apt-get update
-    - apt-get install -y chromium-browser
-    - pip install selenium
-    - pip install webdriver_manager
-    - wget https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
-    - unzip chromedriver_linux64.zip -d /usr/local/bin/
+    - powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser"
+    - powershell -Command "pip install selenium"
+    - powershell -Command "pip install webdriver_manager"
+    - powershell -Command "Invoke-WebRequest -Uri 'https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_win32.zip' -OutFile 'chromedriver_win32.zip'"
+    - powershell -Command "Expand-Archive -Path 'chromedriver_win32.zip' -DestinationPath 'C:\chromedriver'"
+    - powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\chromedriver', [System.EnvironmentVariableTarget]::Machine)"
   script:
-    - python tests/test_harri_map.py
+    - powershell -Command "python tests/test_harri_map.py"
   artifacts:
     paths:
       - screenshots/
@@ -44,8 +42,8 @@ test_main:
 deploy:
   stage: deploy
   script:
-    - echo "Déploiement en cours..."
-    # Ajoute ici tes commandes de déploiement spécifiques
+    - powershell -Command "Write-Host 'Déploiement en cours...'"
+    # Ajoutez ici vos commandes de déploiement spécifiques
   environment:
     name: production
     url: http://127.0.0.1:8000/
