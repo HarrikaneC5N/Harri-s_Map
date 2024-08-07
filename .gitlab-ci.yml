@@ -19,7 +19,7 @@ test_dev:
   only:
     - dev
   tags:
-    - shell-runner
+    - my-shell-runner
 
 # Job de test pour la branche principale
 test_main:
@@ -38,7 +38,7 @@ test_main:
   only:
     - main
   tags:
-    - shell-runner
+    - my-shell-runner
 
 # Job de déploiement
 deploy:
