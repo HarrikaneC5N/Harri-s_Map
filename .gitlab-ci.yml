@@ -42,6 +42,6 @@ deploy:
     # Ajoute ici tes commandes de déploiement spécifiques
   environment:
     name: production
-    url: https://votre-site.com
+    url: http://127.0.0.1:8000/
   only:
     - main
