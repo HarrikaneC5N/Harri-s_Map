@@ -6,6 +6,7 @@ stages:
 test_dev:
   stage: test
   script:
+    - echo "Avant premier pip"
     - pip install selenium webdriver_manager
     - python tests/test_harri_map.py
   artifacts:
@@ -20,6 +21,7 @@ test_dev:
 test_main:
   stage: test
   script:
+    - echo "Avant premier pip test main"
     - pip install selenium webdriver_manager
     - python tests/test_harri_map.py
   artifacts:
