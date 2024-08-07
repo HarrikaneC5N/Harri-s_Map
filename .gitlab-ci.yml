@@ -1,17 +1,35 @@
 stages:
   - test
+  - deploy
 
-# Job de test simple
-test_job:
+# Job de test
+test:
   stage: test
   before_script:
-    - python --version
-    - pip --version
-    - pip install selenium webdriver_manager
+    - pwsh -Command "python --version"
+    - pwsh -Command "pip --version"
+    - pwsh -Command "pip install selenium"
+    - pwsh -Command "Invoke-WebRequest -Uri 'https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_win32.zip' -OutFile 'chromedriver_win32.zip'"
+    - pwsh -Command "Expand-Archive -Path 'chromedriver_win32.zip' -DestinationPath 'C:\\chromedriver'"
+    - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\\chromedriver', [System.EnvironmentVariableTarget]::Process)"
   script:
-    - echo "c'est good"
+    - pwsh -Command "python tests/test_harri_map.py"
+  artifacts:
+    paths:
+      - screenshots/
+  tags:
+    - my-shell-runner
+
+# Job de déploiement
+deploy:
+  stage: deploy
+  script:
+    - pwsh -Command "Write-Host 'Déploiement en cours...'"
+    # Commandes de déploiement ici
+  environment:
+    name: production
+    url: https://votre-site.com
   only:
-    - dev
     - main
   tags:
     - my-shell-runner
