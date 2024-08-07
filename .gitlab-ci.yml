@@ -7,6 +7,8 @@ test_dev:
   stage: test
   image: python:3.8
   before_script:
+    - apt-get update
+    - apt-get install -y chromium-browser
     - pip install selenium
     - pip install webdriver_manager
     - wget https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
@@ -24,6 +26,8 @@ test_main:
   stage: test
   image: python:3.8
   before_script:
+    - apt-get update
+    - apt-get install -y chromium-browser
     - pip install selenium
     - pip install webdriver_manager
     - wget https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip

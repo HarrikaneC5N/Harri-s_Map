@@ -9,9 +9,11 @@ import os
 # Configurer les options du navigateur
 chrome_options = Options()
 chrome_options.add_argument("--headless")  # Exécuter en mode headless (sans interface graphique)
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
 
 # Installer et lancer le WebDriver
-service = ChromeService(executable_path=ChromeDriverManager().install())
+service = ChromeService(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # Ouvrir la page web
