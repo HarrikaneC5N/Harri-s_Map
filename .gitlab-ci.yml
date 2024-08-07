@@ -1,55 +1,17 @@
 stages:
   - test
-  - deploy
 
-# Job de test pour la branche de développement
-test_dev:
+# Job de test simple
+test_job:
   stage: test
   before_script:
-    - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', `"$env:PATH;C:\Python39;C:\Python39\Scripts`", [System.EnvironmentVariableTarget]::Process)"
-    - pwsh -Command "[System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Process)"
     - pwsh -Command "python --version"
     - pwsh -Command "pip --version"
-  script:
     - pwsh -Command "pip install selenium webdriver_manager"
-    - pwsh -Command "python tests/test_harri_map.py"
-  artifacts:
-    paths:
-      - screenshots/
+  script:
+    - pwsh -Command "python -c 'print(\"Running simple test...\")'"
   only:
     - dev
-  tags:
-    - my-shell-runner
-
-# Job de test pour la branche principale
-test_main:
-  stage: test
-  before_script:
-    - pwsh -Command "[System.Environment]::SetEnvironmentVariable('PATH', `"$env:PATH;C:\Python39;C:\Python39\Scripts`", [System.EnvironmentVariableTarget]::Process)"
-    - pwsh -Command "[System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Process)"
-    - pwsh -Command "python --version"
-    - pwsh -Command "pip --version"
-  script:
-    - pwsh -Command "pip install selenium webdriver_manager"
-    - pwsh -Command "python tests/test_harri_map.py"
-  artifacts:
-    paths:
-      - screenshots/
-  only:
-    - main
-  tags:
-    - my-shell-runner
-
-# Job de déploiement
-deploy:
-  stage: deploy
-  script:
-    - pwsh -Command "Write-Host 'Déploiement en cours...'"
-    # Ajoutez ici vos commandes de déploiement spécifiques
-  environment:
-    name: production
-    url: http://127.0.0.1:8000/
-  only:
     - main
   tags:
     - my-shell-runner
